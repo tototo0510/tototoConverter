@@ -455,19 +455,20 @@ void loadTEC(map<int, vector<TEC>> &TECdata, map<int, string> &TECfiles, vector<
 		else if (strstr(line.c_str(), "{") != NULL || strstr(line.c_str(), "}") != NULL) skipTECLines.push_back(line);
 		else
 		{
-		// 行をタブ区切りで分解
-		string token;
-		istringstream iss(line);
-		vector<string> tokens;
-		while (std::getline(iss, token, TSV_TOKEN))
-		{
-			tokens.push_back(token);
-		}
+			// 行をタブ区切りで分解
+			string token;
+			istringstream iss(line);
+			vector<string> tokens;
+			while (std::getline(iss, token, TSV_TOKEN))
+			{
+				tokens.push_back(token);
+			}
 
-		// 解析してデータを挿入できなかった場合、skipした行として保持(最後に出力する)
-		if (!analyzeTEC(tokens, TECdata, TECfiles))
-		{
-			skipTECLines.push_back(line);
+			// 解析してデータを挿入できなかった場合、skipした行として保持(最後に出力する)
+			if (!analyzeTEC(tokens, TECdata, TECfiles))
+			{
+				skipTECLines.push_back(line);
+			}
 		}
 	}
 
