@@ -453,6 +453,8 @@ void loadTEC(map<int, vector<TEC>> &TECdata, map<int, string> &TECfiles, vector<
 		else if(strstr(line.c_str(), "IMPLEMENT_") != NULL) skipTECLines.push_back(line);
 		// 処理が書いてあるもの
 		else if (strstr(line.c_str(), "{") != NULL || strstr(line.c_str(), "}") != NULL) skipTECLines.push_back(line);
+		// モジュール外
+		else if (strstr(line.c_str(), "モジュール外") != NULL || strstr(line.c_str(), "}") != NULL) skipTECLines.push_back(line);
 		else
 		{
 			// 行をタブ区切りで分解
@@ -668,6 +670,7 @@ int main(void)
 
 	outputFile("output/updated_tec.csv",updatedTECdata);
 	outputFile("output/noused_tec.csv", TECdata);
+	outputFile("output/noused_udb.csv", UDBdata);
 
 	return 0;
 }
